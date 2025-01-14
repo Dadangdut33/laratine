@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Log;
+
 if (!function_exists('getAvatarAssetUrl')) {
   /**
    * Get the asset URL for the user's avatar.
@@ -13,7 +15,7 @@ if (!function_exists('getAvatarAssetUrl')) {
           $user = $user ?: request()->user();
           return optional($user)->avatar ? asset("storage/{$user->avatar}") : null;
       } catch (\Exception $e) {
-          \Log::error('Error retrieving avatar URL: ' . $e->getMessage());
+          Log::error('Error retrieving avatar URL: ' . $e->getMessage());
           return null;
       }
   }

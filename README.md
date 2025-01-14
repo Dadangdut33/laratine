@@ -1,5 +1,7 @@
 # Laratine
 
+This is a fork of laratine with a few changes or modification for my personal use.
+
 Laratine is a modern, responsive admin dashboard built with Laravel and Inertia.js (React). It offers a robust and flexible structure to manage your application with ease and efficiency.
 
 ## Features
@@ -17,16 +19,26 @@ Laratine is a modern, responsive admin dashboard built with Laravel and Inertia.
 
 Before you begin, ensure you have met the following requirements:
 
-- PHP >= 8.0
+- PHP >= 8.0 (8.3 recommended)
 - Composer
-- Node.js and npm
+- Node.js (20.17.0) and pnpm
 - Docker and Docker Compose
 - A web server (e.g., Apache, Nginx)
 - A database (e.g., MySQL, PostgreSQL)
 
 ### Steps
 
+#### Pnpm
+
+It is recommended to use pnpm to manage the front-end dependencies. You can install pnpm globally using npm:
+
+```sh
+npm install -g pnpm
+```
+
 #### VSCode Dev Container
+
+(I havent tested this after changing the stuff)
 
 You can also use VSCode Dev Container to develop Laratine. Simply open the project folder in VSCode, and the Dev Container will take care of setting up the environment for you.
 
@@ -43,7 +55,7 @@ cd laratine
 
 ```sh
 composer install
-npm install
+pnpm install
 ```
 
 **Copy the .env.example file to .env:**
@@ -61,12 +73,18 @@ php artisan key:generate
 **Update the following lines in your .env file to match your database configuration:**
 
 ```sh
-DB_CONNECTION=mysql
+DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
-DB_PORT=3306
+DB_PORT=5432
 DB_DATABASE=your_database
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
+```
+
+**Create storage link:**
+
+```sh
+php artisan storage:link
 ```
 
 **Run the database migrations:**
@@ -75,10 +93,16 @@ DB_PASSWORD=your_password
 php artisan migrate
 ```
 
+**Seed the database:**
+
+```sh
+php artisan db:seed
+```
+
 **Build the front-end assets:**
 
 ```sh
-npm run dev
+pnpm run dev
 ```
 
 **Start the development server:**

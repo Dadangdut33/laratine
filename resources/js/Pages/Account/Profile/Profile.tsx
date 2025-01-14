@@ -55,13 +55,15 @@ function Profile({ auth }: PageProps) {
   const onSubmitAccount: FormEventHandler = () => {
     form.post(route('profile.update'), {
       preserveScroll: true,
-      onSuccess: response => {
+      onSuccess: (response) => {
         notifications.show({
           title: 'Account updated!',
           message: 'Profile has been updated successfully.',
         });
       },
-      onError: error => {
+      onError: (error) => {
+        console.error(error);
+
         notifications.show({
           title: 'Failed!',
           message: 'Something went wrong, Try again.',
@@ -109,7 +111,7 @@ function Profile({ auth }: PageProps) {
                           value={form.data.firstname}
                           error={form.errors.firstname}
                           disabled={form.processing}
-                          onChange={e => form.setData('firstname', e.target.value)}
+                          onChange={(e) => form.setData('firstname', e.target.value)}
                         />
                         <TextInput
                           withAsterisk
@@ -118,7 +120,7 @@ function Profile({ auth }: PageProps) {
                           value={form.data.lastname}
                           error={form.errors.lastname}
                           disabled={form.processing}
-                          onChange={e => form.setData('lastname', e.target.value)}
+                          onChange={(e) => form.setData('lastname', e.target.value)}
                         />
                       </SimpleGrid>
                       <TextInput
@@ -129,7 +131,7 @@ function Profile({ auth }: PageProps) {
                         value={form.data.email}
                         error={form.errors.email}
                         disabled={form.processing}
-                        onChange={e => form.setData('email', e.target.value)}
+                        onChange={(e) => form.setData('email', e.target.value)}
                       />
                       <TextInput
                         type="address"
@@ -138,7 +140,7 @@ function Profile({ auth }: PageProps) {
                         value={form.data.address}
                         error={form.errors.address}
                         disabled={form.processing}
-                        onChange={e => form.setData('address', e.target.value)}
+                        onChange={(e) => form.setData('address', e.target.value)}
                       />
                       <SimpleGrid cols={{ base: 1, md: 3 }}>
                         <TextInput
@@ -147,7 +149,7 @@ function Profile({ auth }: PageProps) {
                           value={form.data.city}
                           error={form.errors.city}
                           disabled={form.processing}
-                          onChange={e => form.setData('city', e.target.value)}
+                          onChange={(e) => form.setData('city', e.target.value)}
                         />
                         <TextInput
                           label="State"
@@ -155,7 +157,7 @@ function Profile({ auth }: PageProps) {
                           value={form.data.state}
                           error={form.errors.state}
                           disabled={form.processing}
-                          onChange={e => form.setData('state', e.target.value)}
+                          onChange={(e) => form.setData('state', e.target.value)}
                         />
                         <TextInput
                           label="Postcode"
@@ -163,7 +165,7 @@ function Profile({ auth }: PageProps) {
                           value={form.data.postcode}
                           error={form.errors.postcode}
                           disabled={form.processing}
-                          onChange={e => form.setData('postcode', e.target.value)}
+                          onChange={(e) => form.setData('postcode', e.target.value)}
                         />
                       </SimpleGrid>
                       <TextEditor
@@ -206,12 +208,8 @@ function Profile({ auth }: PageProps) {
                           <Grid gutter={12} justify="center">
                             <Grid.Col span={avatar ? 8 : 12}>
                               <FileButton onChange={onFileUpload} accept="image/png,image/jpeg">
-                                {props => (
-                                  <Button
-                                    {...props}
-                                    variant="subtle"
-                                    leftSection={<IconCloudUpload size={16} />}
-                                  >
+                                {(props) => (
+                                  <Button {...props} variant="subtle" leftSection={<IconCloudUpload size={16} />}>
                                     Upload image
                                   </Button>
                                 )}
